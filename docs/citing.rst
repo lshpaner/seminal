@@ -11,7 +11,7 @@ the original paper by Tradewell et al. (2022).
      title     = {{seminal: published risk equations in andrology and
                    male reproductive health}},
      year      = 2026,
-     version   = {0.0.0a2},
+     version   = {0.0.0a4},
      publisher = {Zenodo},
      doi       = {10.5281/zenodo.24411154},
      url       = {https://doi.org/10.5281/zenodo.24411154}
