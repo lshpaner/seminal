@@ -39,9 +39,7 @@ Installation
 
 .. code-block:: bash
 
-   pip install --pre seminal
-
-``--pre`` is needed while the package is in alpha.
+   pip install seminal
 
 Table of Contents
 -----------------
