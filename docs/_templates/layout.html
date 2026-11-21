@@ -1,0 +1,7 @@
+{% extends "!layout.html" %}
+{#- Logo at the top of every page, including search, index and source pages -#}
+{% block document %}
+<img src="{{ pathto('_static/seminal_logo.svg', 1) }}" alt="seminal Python library"
+     width="220" class="seminal-logo" draggable="false" oncontextmenu="return false;">
+{{ super() }}
+{% endblock %}

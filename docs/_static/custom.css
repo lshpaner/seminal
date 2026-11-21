@@ -1,0 +1,22 @@
+/* Wide display equations scroll inside their box instead of overflowing the page */
+div.math, .math {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+/* Page logo: not selectable, not draggable */
+img.seminal-logo {
+    display: block;
+    margin-bottom: 1em;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+}
+
+/* Images that should not be clicked, dragged or saved */
+.no-click img {
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}

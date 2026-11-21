@@ -1,0 +1,52 @@
+name: Docs
+
+# Builds the Sphinx docs on every push to the docs branch (warnings fail the
+# build) and deploys the site to the gh-pages branch. main carries no docs.
+# Both notebooks execute at build time, so the Dataverse data are downloaded
+# and preprocessed first.
+on:
+  push:
+    branches: [docs]
+    paths:
+      - "docs/**"
+      - "src/**"
+      - "notebooks/**"
+      - "data_gen.py"
+      - "preprocessing.py"
+      - ".github/workflows/docs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write   # needed to push the built site to gh-pages
+
+jobs:
+  docs:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install package, data and docs dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[data,docs]"
+
+      - name: Download and preprocess the Dataverse data
+        run: |
+          python data_gen.py
+          python preprocessing.py
+
+      - name: Build HTML
+        run: make -C docs html
+
+      - name: Deploy to gh-pages
+        if: github.ref == 'refs/heads/docs'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/_build/html
+          publish_branch: gh-pages
+          force_orphan: true
