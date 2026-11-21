@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>seminal.azoospermia &mdash; seminal 0.0.0a2</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=6a49913a" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7e40b191"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=fd10adb8"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            seminal
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#fsh-alone">FSH alone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#full-logistic-model">Full logistic model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#score-a-cohort">Score a cohort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#library-overview">Library overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#table-of-contents">Table of Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../_notebooks/00_quickstart.html">seminal quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../_notebooks/00_quickstart.html#one-patient">One patient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_notebooks/00_quickstart.html#the-fsh-curve">The FSH curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_notebooks/00_quickstart.html#scoring-a-cohort">Scoring a cohort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_notebooks/00_quickstart.html#explaining-a-prediction">Explaining a prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_notebooks/00_quickstart.html#where-to-go-next">Where to go next</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../usage_guide.html">Usage Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../usage_guide.html#fsh-alone-azoospermia-fsh">FSH alone: <code class="docutils literal notranslate"><span class="pre">azoospermia_fsh</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usage_guide.html#full-model-azoospermia-lr">Full model: <code class="docutils literal notranslate"><span class="pre">azoospermia_lr</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../usage_guide.html#explaining-a-prediction">Explaining a prediction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../usage_guide.html#cohorts-add-azoospermia-risk-cols">Cohorts: <code class="docutils literal notranslate"><span class="pre">add_azoospermia_risk_cols</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../inputs.html">Input Requirements and Common Pitfalls</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../inputs.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../inputs.html#common-pitfalls">Common pitfalls</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../model.html">The Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../model.html#outcome">Outcome</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../model.html#development">Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../model.html#fsh-only-quadratic">FSH-only quadratic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../model.html#logistic-regression">Logistic regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../model.html#what-the-reproduction-shows">What the reproduction shows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../model.html#discrimination">Discrimination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../model.html#what-is-not-implemented">What is not implemented</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../data.html">The Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../data.html#download-and-harmonize">Download and harmonize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../data.html#two-exclusion-rules">Two exclusion rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../data.html#things-to-know">Things to know</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../_notebooks/01_reproduce_tradewell.html">Reproducing Tradewell et al. 2022</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../_notebooks/01_reproduce_tradewell.html#cohort-reconstruction">1. Cohort reconstruction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_notebooks/01_reproduce_tradewell.html#table-1">2. Table 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_notebooks/01_reproduce_tradewell.html#refit-on-the-miami-development-cohort">3. Refit on the Miami development cohort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_notebooks/01_reproduce_tradewell.html#external-validation-in-depth">4. External validation in depth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_notebooks/01_reproduce_tradewell.html#recalibration-per-site">5. Recalibration per site</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_notebooks/01_reproduce_tradewell.html#sensitivity-analyses">6. Sensitivity analyses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_notebooks/01_reproduce_tradewell.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#single-patient">Single patient</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#seminal.azoospermia_fsh"><code class="docutils literal notranslate"><span class="pre">azoospermia_fsh()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#seminal.azoospermia_lr"><code class="docutils literal notranslate"><span class="pre">azoospermia_lr()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#cohorts">Cohorts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#seminal.add_azoospermia_risk_cols"><code class="docutils literal notranslate"><span class="pre">add_azoospermia_risk_cols()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#constants">Constants</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About seminal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributors.html">Contributors/Maintainers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../citing.html">Citing seminal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#version-0-0-0a2-2026-11-20">Version 0.0.0a2 (2026-11-20)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#version-0-0-0a1-2026-11-20">Version 0.0.0a1 (2026-11-20)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">seminal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">seminal.azoospermia</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<img src="../../_static/seminal_logo.svg" alt="seminal Python library"
+     width="220" class="seminal-logo" draggable="false" oncontextmenu="return false;">
+
+           <div itemprop="articleBody">
+             
+  <h1>Source code for seminal.azoospermia</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""Probability of azoospermia from serum FSH and clinical inputs.</span>
+
+<span class="sd">Implements the two models of Tradewell et al., World J Mens Health</span>
+<span class="sd">2022;40(4):600-607 (doi:10.5534/wjmh.210138), developed on 946 men from</span>
+<span class="sd">the University of Miami infertility clinic and externally validated on</span>
+<span class="sd">Milan (n=1,955) and Chicago (n=596):</span>
+
+<span class="sd">* ``azoospermia_fsh``: a quadratic in serum FSH alone (Fig. 1 of the paper).</span>
+<span class="sd">* ``azoospermia_lr``:  a logistic regression on age, FSH, LH, total</span>
+<span class="sd">  testosterone and mean testis volume (Table 3 of the paper).</span>
+
+<span class="sd">Both coefficients sets are used exactly as printed. The paper rounds the</span>
+<span class="sd">logistic coefficients to one or two significant figures; see the README</span>
+<span class="sd">for what that implies.</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Published coefficients</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+<span class="c1"># Table 3. Logistic regression model coefficients (log-odds scale).</span>
+<span class="c1"># Fit on Miami data (n=946). Units: age in years, FSH and LH in IU/L,</span>
+<span class="c1"># total testosterone in ng/dL, mean testis volume in cm^3 (Prader orchidometer).</span>
+<span class="n">LR_COEFS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"intercept"</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.9</span><span class="p">,</span>
+    <span class="s2">"age"</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
+    <span class="s2">"fsh"</span><span class="p">:</span> <span class="mf">0.13</span><span class="p">,</span>
+    <span class="s2">"lh"</span><span class="p">:</span> <span class="mf">0.03</span><span class="p">,</span>
+    <span class="s2">"testosterone"</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.002</span><span class="p">,</span>
+    <span class="s2">"testis_volume"</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.08</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># Fig. 1. Quadratic fit to binned Miami probabilities, output in percent:</span>
+<span class="c1">#     p(%) = 0.133 * FSH^2 - 0.965 * FSH + 10.1       (R^2 = 0.95)</span>
+<span class="n">FSH_QUAD</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"a"</span><span class="p">:</span> <span class="mf">0.133</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.965</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">:</span> <span class="mf">10.1</span><span class="p">}</span>
+
+<span class="c1"># Reference limits quoted in the paper (Methods), used only for input warnings.</span>
+<span class="n">REFERENCE_RANGES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"fsh"</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">7.6</span><span class="p">),</span>            <span class="c1"># IU/L</span>
+    <span class="s2">"lh"</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.8</span><span class="p">,</span> <span class="mf">8.6</span><span class="p">),</span>             <span class="c1"># IU/L</span>
+    <span class="s2">"testosterone"</span><span class="p">:</span> <span class="p">(</span><span class="mi">264</span><span class="p">,</span> <span class="mi">916</span><span class="p">),</span>   <span class="c1"># ng/dL</span>
+    <span class="s2">"testis_volume"</span><span class="p">:</span> <span class="p">(</span><span class="mf">12.5</span><span class="p">,</span> <span class="mi">19</span><span class="p">),</span>  <span class="c1"># cm^3, mean of both testes</span>
+<span class="p">}</span>
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># FSH-only quadratic model</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="azoospermia_fsh">
+<a class="viewcode-back" href="../../api.html#seminal.azoospermia_fsh">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">azoospermia_fsh</span><span class="p">(</span><span class="n">fsh</span><span class="p">,</span> <span class="n">clip</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Probability of azoospermia from serum FSH alone (quadratic model).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fsh : float or array-like</span>
+<span class="sd">        Serum follicle-stimulating hormone in IU/L.</span>
+<span class="sd">    clip : bool, default True</span>
+<span class="sd">        Clip the result to [0, 1]. The published quadratic exceeds 100%</span>
+<span class="sd">        above roughly 30 IU/L and is unbounded; the paper's own validation</span>
+<span class="sd">        tables carry unclipped values above 1. Set ``clip=False`` to</span>
+<span class="sd">        reproduce that behaviour exactly.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float or numpy.ndarray</span>
+<span class="sd">        Probability between 0 and 1 (a fraction, not a percent).</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The curve is U-shaped: 10.1% at undetectable FSH, a minimum of about</span>
+<span class="sd">    8.4% at FSH 3.6 IU/L, and 100% at about 29.9 IU/L.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; round(azoospermia_fsh(0), 3)</span>
+<span class="sd">    0.101</span>
+<span class="sd">    &gt;&gt;&gt; round(azoospermia_fsh(20), 3)</span>
+<span class="sd">    0.439</span>
+<span class="sd">    """</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">fsh</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">pct</span> <span class="o">=</span> <span class="n">FSH_QUAD</span><span class="p">[</span><span class="s2">"a"</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">FSH_QUAD</span><span class="p">[</span><span class="s2">"b"</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">FSH_QUAD</span><span class="p">[</span><span class="s2">"c"</span><span class="p">]</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">pct</span> <span class="o">/</span> <span class="mf">100.0</span>
+    <span class="k">if</span> <span class="n">clip</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">p</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Logistic regression model</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_lr_terms</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="n">fsh</span><span class="p">,</span> <span class="n">lh</span><span class="p">,</span> <span class="n">testosterone</span><span class="p">,</span> <span class="n">testis_volume</span><span class="p">):</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">LR_COEFS</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">"age"</span><span class="p">:</span> <span class="n">b</span><span class="p">[</span><span class="s2">"age"</span><span class="p">]</span> <span class="o">*</span> <span class="n">age</span><span class="p">,</span>
+        <span class="s2">"fsh"</span><span class="p">:</span> <span class="n">b</span><span class="p">[</span><span class="s2">"fsh"</span><span class="p">]</span> <span class="o">*</span> <span class="n">fsh</span><span class="p">,</span>
+        <span class="s2">"lh"</span><span class="p">:</span> <span class="n">b</span><span class="p">[</span><span class="s2">"lh"</span><span class="p">]</span> <span class="o">*</span> <span class="n">lh</span><span class="p">,</span>
+        <span class="s2">"testosterone"</span><span class="p">:</span> <span class="n">b</span><span class="p">[</span><span class="s2">"testosterone"</span><span class="p">]</span> <span class="o">*</span> <span class="n">testosterone</span><span class="p">,</span>
+        <span class="s2">"testis_volume"</span><span class="p">:</span> <span class="n">b</span><span class="p">[</span><span class="s2">"testis_volume"</span><span class="p">]</span> <span class="o">*</span> <span class="n">testis_volume</span><span class="p">,</span>
+    <span class="p">}</span>
+
+
+<div class="viewcode-block" id="azoospermia_lr">
+<a class="viewcode-back" href="../../api.html#seminal.azoospermia_lr">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">azoospermia_lr</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="n">fsh</span><span class="p">,</span> <span class="n">lh</span><span class="p">,</span> <span class="n">testosterone</span><span class="p">,</span> <span class="n">testis_volume</span><span class="p">,</span> <span class="n">explain</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Probability of azoospermia from the logistic regression model.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    age : float</span>
+<span class="sd">        Age in years.</span>
+<span class="sd">    fsh : float</span>
+<span class="sd">        Serum FSH in IU/L.</span>
+<span class="sd">    lh : float</span>
+<span class="sd">        Serum luteinizing hormone in IU/L.</span>
+<span class="sd">    testosterone : float</span>
+<span class="sd">        Total testosterone in ng/dL. (Divide nmol/L by 0.03467 to convert.)</span>
+<span class="sd">    testis_volume : float</span>
+<span class="sd">        Mean of left and right testis volume in cm^3 (mL), as estimated by</span>
+<span class="sd">        Prader orchidometer in the development cohort.</span>
+<span class="sd">    explain : bool, default False</span>
+<span class="sd">        Return a breakdown instead of just the probability.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float or dict</span>
+<span class="sd">        Probability between 0 and 1. With ``explain=True``, a dict with</span>
+<span class="sd">        ``risk``, ``intercept``, ``linear_predictor`` (log-odds) and</span>
+<span class="sd">        ``contributions`` (each predictor's log-odds term, largest first).</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The paper prints the model form as ``1/exp[-(b0 + bi*Xi)]``, which is a</span>
+<span class="sd">    typesetting error (it would exceed 1). The standard logistic form</span>
+<span class="sd">    ``1/(1 + exp(-(b0 + sum(bi*Xi))))`` is used here.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; round(azoospermia_lr(age=36, fsh=5.7, lh=4.5, testosterone=429,</span>
+<span class="sd">    ...                      testis_volume=15), 3)</span>
+<span class="sd">    0.086</span>
+<span class="sd">    """</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="n">_lr_terms</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="n">fsh</span><span class="p">,</span> <span class="n">lh</span><span class="p">,</span> <span class="n">testosterone</span><span class="p">,</span> <span class="n">testis_volume</span><span class="p">)</span>
+    <span class="n">lp</span> <span class="o">=</span> <span class="n">LR_COEFS</span><span class="p">[</span><span class="s2">"intercept"</span><span class="p">]</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">terms</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">risk</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">lp</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">explain</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">risk</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">"risk"</span><span class="p">:</span> <span class="n">risk</span><span class="p">,</span>
+        <span class="s2">"intercept"</span><span class="p">:</span> <span class="n">LR_COEFS</span><span class="p">[</span><span class="s2">"intercept"</span><span class="p">],</span>
+        <span class="s2">"linear_predictor"</span><span class="p">:</span> <span class="n">lp</span><span class="p">,</span>
+        <span class="s2">"contributions"</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">terms</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">kv</span><span class="p">:</span> <span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">kv</span><span class="p">[</span><span class="mi">1</span><span class="p">]))),</span>
+    <span class="p">}</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Cohort scoring</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="add_azoospermia_risk_cols">
+<a class="viewcode-back" href="../../api.html#seminal.add_azoospermia_risk_cols">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_azoospermia_risk_cols</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span>
+    <span class="n">age_col</span><span class="o">=</span><span class="s2">"age"</span><span class="p">,</span>
+    <span class="n">fsh_col</span><span class="o">=</span><span class="s2">"fsh"</span><span class="p">,</span>
+    <span class="n">lh_col</span><span class="o">=</span><span class="s2">"lh"</span><span class="p">,</span>
+    <span class="n">testosterone_col</span><span class="o">=</span><span class="s2">"testosterone"</span><span class="p">,</span>
+    <span class="n">testis_volume_col</span><span class="o">=</span><span class="s2">"testis_volume"</span><span class="p">,</span>
+    <span class="n">lr_col</span><span class="o">=</span><span class="s2">"azoo_lr"</span><span class="p">,</span>
+    <span class="n">fsh_model_col</span><span class="o">=</span><span class="s2">"azoo_fsh"</span><span class="p">,</span>
+    <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Add both azoospermia probabilities to every row of a DataFrame.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pandas.DataFrame</span>
+<span class="sd">        One row per semen analysis / hormone panel.</span>
+<span class="sd">    age_col, fsh_col, lh_col, testosterone_col, testis_volume_col : str</span>
+<span class="sd">        Column names for the five logistic-model inputs. Only ``fsh_col``</span>
+<span class="sd">        is needed for the FSH-only model.</span>
+<span class="sd">    lr_col : str, default "azoo_lr"</span>
+<span class="sd">        Name of the logistic regression probability column.</span>
+<span class="sd">    fsh_model_col : str, default "azoo_fsh"</span>
+<span class="sd">        Name of the FSH-only quadratic probability column.</span>
+<span class="sd">    copy : bool, default True</span>
+<span class="sd">        Work on a copy and leave ``df`` unchanged.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pandas.DataFrame</span>
+<span class="sd">        ``df`` (or a copy) with the two probability columns added. A row</span>
+<span class="sd">        with any logistic-model input missing gets ``NaN`` in ``lr_col``;</span>
+<span class="sd">        the FSH-only column needs only FSH.</span>
+<span class="sd">    """</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">if</span> <span class="n">copy</span> <span class="k">else</span> <span class="n">df</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">LR_COEFS</span>
+
+    <span class="n">fsh</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="n">fsh_col</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"coerce"</span><span class="p">)</span>
+    <span class="n">out</span><span class="p">[</span><span class="n">fsh_model_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">azoospermia_fsh</span><span class="p">(</span><span class="n">fsh</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
+
+    <span class="n">lp</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">b</span><span class="p">[</span><span class="s2">"intercept"</span><span class="p">]</span>
+        <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="s2">"age"</span><span class="p">]</span> <span class="o">*</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="n">age_col</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"coerce"</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="s2">"fsh"</span><span class="p">]</span> <span class="o">*</span> <span class="n">fsh</span>
+        <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="s2">"lh"</span><span class="p">]</span> <span class="o">*</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="n">lh_col</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"coerce"</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="s2">"testosterone"</span><span class="p">]</span> <span class="o">*</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="n">testosterone_col</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"coerce"</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="s2">"testis_volume"</span><span class="p">]</span> <span class="o">*</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="n">testis_volume_col</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"coerce"</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">out</span><span class="p">[</span><span class="n">lr_col</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">lp</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">out</span></div>
+
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"LR_COEFS"</span><span class="p">,</span>
+    <span class="s2">"FSH_QUAD"</span><span class="p">,</span>
+    <span class="s2">"REFERENCE_RANGES"</span><span class="p">,</span>
+    <span class="s2">"azoospermia_fsh"</span><span class="p">,</span>
+    <span class="s2">"azoospermia_lr"</span><span class="p">,</span>
+    <span class="s2">"add_azoospermia_risk_cols"</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+
+           </div>
+          </div>
+
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Leon Shpaner.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

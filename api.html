@@ -1,0 +1,324 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Reference &mdash; seminal 0.0.0a2</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=6a49913a" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=7e40b191"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=fd10adb8"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contributors/Maintainers" href="contributors.html" />
+    <link rel="prev" title="Reproducing Tradewell et al. 2022" href="_notebooks/01_reproduce_tradewell.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            seminal
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#fsh-alone">FSH alone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#full-logistic-model">Full logistic model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#score-a-cohort">Score a cohort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#library-overview">Library overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#table-of-contents">Table of Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_notebooks/00_quickstart.html">seminal quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/00_quickstart.html#one-patient">One patient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/00_quickstart.html#the-fsh-curve">The FSH curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/00_quickstart.html#scoring-a-cohort">Scoring a cohort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/00_quickstart.html#explaining-a-prediction">Explaining a prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/00_quickstart.html#where-to-go-next">Where to go next</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usage_guide.html">Usage Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage_guide.html#fsh-alone-azoospermia-fsh">FSH alone: <code class="docutils literal notranslate"><span class="pre">azoospermia_fsh</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage_guide.html#full-model-azoospermia-lr">Full model: <code class="docutils literal notranslate"><span class="pre">azoospermia_lr</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage_guide.html#explaining-a-prediction">Explaining a prediction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage_guide.html#cohorts-add-azoospermia-risk-cols">Cohorts: <code class="docutils literal notranslate"><span class="pre">add_azoospermia_risk_cols</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="inputs.html">Input Requirements and Common Pitfalls</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="inputs.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inputs.html#common-pitfalls">Common pitfalls</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="model.html">The Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="model.html#outcome">Outcome</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#development">Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#fsh-only-quadratic">FSH-only quadratic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#logistic-regression">Logistic regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#what-the-reproduction-shows">What the reproduction shows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#discrimination">Discrimination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#what-is-not-implemented">What is not implemented</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">The Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="data.html#download-and-harmonize">Download and harmonize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html#two-exclusion-rules">Two exclusion rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html#things-to-know">Things to know</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_notebooks/01_reproduce_tradewell.html">Reproducing Tradewell et al. 2022</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/01_reproduce_tradewell.html#cohort-reconstruction">1. Cohort reconstruction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/01_reproduce_tradewell.html#table-1">2. Table 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/01_reproduce_tradewell.html#refit-on-the-miami-development-cohort">3. Refit on the Miami development cohort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/01_reproduce_tradewell.html#external-validation-in-depth">4. External validation in depth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/01_reproduce_tradewell.html#recalibration-per-site">5. Recalibration per site</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/01_reproduce_tradewell.html#sensitivity-analyses">6. Sensitivity analyses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/01_reproduce_tradewell.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#single-patient">Single patient</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#seminal.azoospermia_fsh"><code class="docutils literal notranslate"><span class="pre">azoospermia_fsh()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#seminal.azoospermia_lr"><code class="docutils literal notranslate"><span class="pre">azoospermia_lr()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cohorts">Cohorts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#seminal.add_azoospermia_risk_cols"><code class="docutils literal notranslate"><span class="pre">add_azoospermia_risk_cols()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#constants">Constants</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About seminal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributors.html">Contributors/Maintainers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing seminal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-0-0-0a2-2026-11-20">Version 0.0.0a2 (2026-11-20)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-0-0-0a1-2026-11-20">Version 0.0.0a1 (2026-11-20)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">seminal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<img src="_static/seminal_logo.svg" alt="seminal Python library"
+     width="220" class="seminal-logo" draggable="false" oncontextmenu="return false;">
+
+           <div itemprop="articleBody">
+             
+  <section id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
+<section id="single-patient">
+<h2>Single patient<a class="headerlink" href="#single-patient" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="seminal.azoospermia_fsh">
+<span class="sig-prename descclassname"><span class="pre">seminal.</span></span><span class="sig-name descname"><span class="pre">azoospermia_fsh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fsh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/seminal/azoospermia.html#azoospermia_fsh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seminal.azoospermia_fsh" title="Link to this definition"></a></dt>
+<dd><p>Probability of azoospermia from serum FSH alone (quadratic model).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fsh</strong> (<em>float</em><em> or </em><em>array-like</em>) – Serum follicle-stimulating hormone in IU/L.</p></li>
+<li><p><strong>clip</strong> (<em>bool</em><em>, </em><em>default True</em>) – Clip the result to [0, 1]. The published quadratic exceeds 100%
+above roughly 30 IU/L and is unbounded; the paper’s own validation
+tables carry unclipped values above 1. Set <code class="docutils literal notranslate"><span class="pre">clip=False</span></code> to
+reproduce that behaviour exactly.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Probability between 0 and 1 (a fraction, not a percent).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float or numpy.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The curve is U-shaped: 10.1% at undetectable FSH, a minimum of about
+8.4% at FSH 3.6 IU/L, and 100% at about 29.9 IU/L.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">azoospermia_fsh</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">0.101</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">azoospermia_fsh</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">0.439</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="seminal.azoospermia_lr">
+<span class="sig-prename descclassname"><span class="pre">seminal.</span></span><span class="sig-name descname"><span class="pre">azoospermia_lr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">age</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fsh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">testosterone</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">testis_volume</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">explain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/seminal/azoospermia.html#azoospermia_lr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seminal.azoospermia_lr" title="Link to this definition"></a></dt>
+<dd><p>Probability of azoospermia from the logistic regression model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>age</strong> (<em>float</em>) – Age in years.</p></li>
+<li><p><strong>fsh</strong> (<em>float</em>) – Serum FSH in IU/L.</p></li>
+<li><p><strong>lh</strong> (<em>float</em>) – Serum luteinizing hormone in IU/L.</p></li>
+<li><p><strong>testosterone</strong> (<em>float</em>) – Total testosterone in ng/dL. (Divide nmol/L by 0.03467 to convert.)</p></li>
+<li><p><strong>testis_volume</strong> (<em>float</em>) – Mean of left and right testis volume in cm^3 (mL), as estimated by
+Prader orchidometer in the development cohort.</p></li>
+<li><p><strong>explain</strong> (<em>bool</em><em>, </em><em>default False</em>) – Return a breakdown instead of just the probability.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Probability between 0 and 1. With <code class="docutils literal notranslate"><span class="pre">explain=True</span></code>, a dict with
+<code class="docutils literal notranslate"><span class="pre">risk</span></code>, <code class="docutils literal notranslate"><span class="pre">intercept</span></code>, <code class="docutils literal notranslate"><span class="pre">linear_predictor</span></code> (log-odds) and
+<code class="docutils literal notranslate"><span class="pre">contributions</span></code> (each predictor’s log-odds term, largest first).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float or dict</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The paper prints the model form as <code class="docutils literal notranslate"><span class="pre">1/exp[-(b0</span> <span class="pre">+</span> <span class="pre">bi*Xi)]</span></code>, which is a
+typesetting error (it would exceed 1). The standard logistic form
+<code class="docutils literal notranslate"><span class="pre">1/(1</span> <span class="pre">+</span> <span class="pre">exp(-(b0</span> <span class="pre">+</span> <span class="pre">sum(bi*Xi))))</span></code> is used here.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">azoospermia_lr</span><span class="p">(</span><span class="n">age</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span> <span class="n">fsh</span><span class="o">=</span><span class="mf">5.7</span><span class="p">,</span> <span class="n">lh</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span> <span class="n">testosterone</span><span class="o">=</span><span class="mi">429</span><span class="p">,</span>
+<span class="gp">... </span>                     <span class="n">testis_volume</span><span class="o">=</span><span class="mi">15</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">0.086</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="cohorts">
+<h2>Cohorts<a class="headerlink" href="#cohorts" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="seminal.add_azoospermia_risk_cols">
+<span class="sig-prename descclassname"><span class="pre">seminal.</span></span><span class="sig-name descname"><span class="pre">add_azoospermia_risk_cols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">age_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'age'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fsh_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fsh'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lh_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'lh'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">testosterone_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'testosterone'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">testis_volume_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'testis_volume'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'azoo_lr'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fsh_model_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'azoo_fsh'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/seminal/azoospermia.html#add_azoospermia_risk_cols"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seminal.add_azoospermia_risk_cols" title="Link to this definition"></a></dt>
+<dd><p>Add both azoospermia probabilities to every row of a DataFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – One row per semen analysis / hormone panel.</p></li>
+<li><p><strong>age_col</strong> (<em>str</em>) – Column names for the five logistic-model inputs. Only <code class="docutils literal notranslate"><span class="pre">fsh_col</span></code>
+is needed for the FSH-only model.</p></li>
+<li><p><strong>fsh_col</strong> (<em>str</em>) – Column names for the five logistic-model inputs. Only <code class="docutils literal notranslate"><span class="pre">fsh_col</span></code>
+is needed for the FSH-only model.</p></li>
+<li><p><strong>lh_col</strong> (<em>str</em>) – Column names for the five logistic-model inputs. Only <code class="docutils literal notranslate"><span class="pre">fsh_col</span></code>
+is needed for the FSH-only model.</p></li>
+<li><p><strong>testosterone_col</strong> (<em>str</em>) – Column names for the five logistic-model inputs. Only <code class="docutils literal notranslate"><span class="pre">fsh_col</span></code>
+is needed for the FSH-only model.</p></li>
+<li><p><strong>testis_volume_col</strong> (<em>str</em>) – Column names for the five logistic-model inputs. Only <code class="docutils literal notranslate"><span class="pre">fsh_col</span></code>
+is needed for the FSH-only model.</p></li>
+<li><p><strong>lr_col</strong> (<em>str</em><em>, </em><em>default &quot;azoo_lr&quot;</em>) – Name of the logistic regression probability column.</p></li>
+<li><p><strong>fsh_model_col</strong> (<em>str</em><em>, </em><em>default &quot;azoo_fsh&quot;</em>) – Name of the FSH-only quadratic probability column.</p></li>
+<li><p><strong>copy</strong> (<em>bool</em><em>, </em><em>default True</em>) – Work on a copy and leave <code class="docutils literal notranslate"><span class="pre">df</span></code> unchanged.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">df</span></code> (or a copy) with the two probability columns added. A row
+with any logistic-model input missing gets <code class="docutils literal notranslate"><span class="pre">NaN</span></code> in <code class="docutils literal notranslate"><span class="pre">lr_col</span></code>;
+the FSH-only column needs only FSH.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="constants">
+<h2>Constants<a class="headerlink" href="#constants" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">seminal.azoospermia.LR_COEFS</span></code></dt><dd><p>Table 3 coefficients on the log-odds scale: <code class="docutils literal notranslate"><span class="pre">intercept</span></code>, <code class="docutils literal notranslate"><span class="pre">age</span></code>,
+<code class="docutils literal notranslate"><span class="pre">fsh</span></code>, <code class="docutils literal notranslate"><span class="pre">lh</span></code>, <code class="docutils literal notranslate"><span class="pre">testosterone</span></code>, <code class="docutils literal notranslate"><span class="pre">testis_volume</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">seminal.azoospermia.FSH_QUAD</span></code></dt><dd><p>Fig. 1 quadratic in percent: <code class="docutils literal notranslate"><span class="pre">a</span></code> (FSH²), <code class="docutils literal notranslate"><span class="pre">b</span></code> (FSH), <code class="docutils literal notranslate"><span class="pre">c</span></code> (constant).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">seminal.azoospermia.REFERENCE_RANGES</span></code></dt><dd><p>Reference limits quoted in the paper for FSH, LH, total testosterone and
+mean testis volume. Informational only; the models do not threshold on
+them.</p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="_notebooks/01_reproduce_tradewell.html" class="btn btn-neutral float-left" title="Reproducing Tradewell et al. 2022" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="contributors.html" class="btn btn-neutral float-right" title="Contributors/Maintainers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Leon Shpaner.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

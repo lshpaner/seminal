@@ -1,0 +1,1634 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reproducing Tradewell et al. 2022 &mdash; seminal 0.0.0a2</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6a49913a" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=7e40b191"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=fd10adb8"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API Reference" href="../api.html" />
+    <link rel="prev" title="The Data" href="../data.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            seminal
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#fsh-alone">FSH alone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#full-logistic-model">Full logistic model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#score-a-cohort">Score a cohort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#library-overview">Library overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#table-of-contents">Table of Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="00_quickstart.html">seminal quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="00_quickstart.html#one-patient">One patient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="00_quickstart.html#the-fsh-curve">The FSH curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="00_quickstart.html#scoring-a-cohort">Scoring a cohort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="00_quickstart.html#explaining-a-prediction">Explaining a prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="00_quickstart.html#where-to-go-next">Where to go next</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../usage_guide.html">Usage Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../usage_guide.html#fsh-alone-azoospermia-fsh">FSH alone: <code class="docutils literal notranslate"><span class="pre">azoospermia_fsh</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usage_guide.html#full-model-azoospermia-lr">Full model: <code class="docutils literal notranslate"><span class="pre">azoospermia_lr</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../usage_guide.html#explaining-a-prediction">Explaining a prediction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../usage_guide.html#cohorts-add-azoospermia-risk-cols">Cohorts: <code class="docutils literal notranslate"><span class="pre">add_azoospermia_risk_cols</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../inputs.html">Input Requirements and Common Pitfalls</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../inputs.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../inputs.html#common-pitfalls">Common pitfalls</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../model.html">The Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../model.html#outcome">Outcome</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../model.html#development">Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../model.html#fsh-only-quadratic">FSH-only quadratic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../model.html#logistic-regression">Logistic regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../model.html#what-the-reproduction-shows">What the reproduction shows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../model.html#discrimination">Discrimination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../model.html#what-is-not-implemented">What is not implemented</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../data.html">The Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data.html#download-and-harmonize">Download and harmonize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data.html#two-exclusion-rules">Two exclusion rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data.html#things-to-know">Things to know</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Reproducing Tradewell et al. 2022</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cohort-reconstruction">1. Cohort reconstruction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#table-1">2. Table 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#refit-on-the-miami-development-cohort">3. Refit on the Miami development cohort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#external-validation-in-depth">4. External validation in depth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#recalibration-per-site">5. Recalibration per site</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sensitivity-analyses">6. Sensitivity analyses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#single-patient">Single patient</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#seminal.azoospermia_fsh"><code class="docutils literal notranslate"><span class="pre">azoospermia_fsh()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#seminal.azoospermia_lr"><code class="docutils literal notranslate"><span class="pre">azoospermia_lr()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#cohorts">Cohorts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#seminal.add_azoospermia_risk_cols"><code class="docutils literal notranslate"><span class="pre">add_azoospermia_risk_cols()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#constants">Constants</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About seminal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors/Maintainers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../citing.html">Citing seminal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-0-0a2-2026-11-20">Version 0.0.0a2 (2026-11-20)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#version-0-0-0a1-2026-11-20">Version 0.0.0a1 (2026-11-20)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">seminal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Reproducing Tradewell et al. 2022</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<img src="../_static/seminal_logo.svg" alt="seminal Python library"
+     width="220" class="seminal-logo" draggable="false" oncontextmenu="return false;">
+
+           <div itemprop="articleBody">
+             
+  <section id="reproducing-tradewell-et-al-2022">
+<h1>Reproducing Tradewell et al. 2022<a class="headerlink" href="#reproducing-tradewell-et-al-2022" title="Link to this heading"></a></h1>
+<p>Independent reproduction of <em>Algorithms for Predicting the Probability of
+Azoospermia from Follicle Stimulating Hormone</em> (World J Mens Health
+2022;40:600-607) from the authors’ CC0 data deposit
+(doi:10.7910/DVN/EQFMCM), using <code class="docutils literal notranslate"><span class="pre">seminal</span></code> for the published equations.</p>
+<p>Sections:</p>
+<ol class="arabic simple">
+<li><p>Cohort reconstruction: stated vs reproduced exclusion criteria</p></li>
+<li><p>Table 1</p></li>
+<li><p>Refit of the logistic model on the Miami development cohort</p></li>
+<li><p>External validation in depth: calibration and decision curves</p></li>
+<li><p>Recalibration per site</p></li>
+<li><p>Sensitivity analyses</p></li>
+</ol>
+<section id="cohort-reconstruction">
+<h2>1. Cohort reconstruction<a class="headerlink" href="#cohort-reconstruction" title="Link to this heading"></a></h2>
+<p>The Methods list four exclusions: prior vasectomy, Y chromosome microdeletion,
+solitary testis, and testosterone or anabolic steroid use in the prior 120
+days. Applied as written to the deposit, they give Miami 943 and Chicago 614,
+against the paper’s 946 and 596. Milan (1,955) matches either way.</p>
+<p>The rule that reproduces the paper’s sample sizes exactly differs in three
+ways, all reverse-engineered from the deposit:</p>
+<ul class="simple">
+<li><p>Y chromosome microdeletion was <strong>not</strong> excluded (2 Miami rows, 3 Chicago rows)</p></li>
+<li><p>Absent testis is <code class="docutils literal notranslate"><span class="pre">Why_Abs</span></code> codes 1 to 3 at Miami (code 4 kept) and a
+recorded testis volume of 0 at Chicago, which has no absent-testis column</p></li>
+<li><p>Chicago counts sperm concentration below 0.01 million/mL as azoospermia
+(3 cryptozoospermic samples recorded as 0.00001 to 0.001)</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">preprocessing.py</span></code> implements both as <code class="docutils literal notranslate"><span class="pre">--exclusions</span> <span class="pre">stated</span></code> and
+<code class="docutils literal notranslate"><span class="pre">--exclusions</span> <span class="pre">reproduced</span></code> (the default).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Build both versions of the processed file</span>
+<span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"stated"</span><span class="p">,</span> <span class="s2">"reproduced"</span><span class="p">]:</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="s2">"python"</span><span class="p">,</span>
+            <span class="s2">"../preprocessing.py"</span><span class="p">,</span>
+            <span class="s2">"--exclusions"</span><span class="p">,</span>
+            <span class="n">rule</span><span class="p">,</span>
+            <span class="s2">"--raw-dir"</span><span class="p">,</span>
+            <span class="s2">"../data/raw"</span><span class="p">,</span>
+            <span class="s2">"--out-dir"</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">"../data/processed/</span><span class="si">{</span><span class="n">rule</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="n">paper</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">"n"</span><span class="p">:</span> <span class="p">[</span><span class="mi">946</span><span class="p">,</span> <span class="mi">1955</span><span class="p">,</span> <span class="mi">596</span><span class="p">,</span> <span class="mi">3497</span><span class="p">],</span> <span class="s2">"azoospermic"</span><span class="p">:</span> <span class="p">[</span><span class="mi">131</span><span class="p">,</span> <span class="mi">465</span><span class="p">,</span> <span class="mi">191</span><span class="p">,</span> <span class="mi">787</span><span class="p">]},</span>
+    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"miami"</span><span class="p">,</span> <span class="s2">"milan"</span><span class="p">,</span> <span class="s2">"chicago"</span><span class="p">,</span> <span class="s2">"total"</span><span class="p">],</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cohort_counts</span><span class="p">(</span><span class="n">rule</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="sa">f</span><span class="s2">"../data/processed/</span><span class="si">{</span><span class="n">rule</span><span class="si">}</span><span class="s2">/tradewell_2022.parquet"</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s2">"included"</span><span class="p">]]</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"site"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">n</span><span class="o">=</span><span class="p">(</span><span class="s2">"azoospermia"</span><span class="p">,</span> <span class="s2">"size"</span><span class="p">),</span> <span class="n">azoospermic</span><span class="o">=</span><span class="p">(</span><span class="s2">"azoospermia"</span><span class="p">,</span> <span class="s2">"sum"</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"total"</span><span class="p">]</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">"miami"</span><span class="p">,</span> <span class="s2">"milan"</span><span class="p">,</span> <span class="s2">"chicago"</span><span class="p">,</span> <span class="s2">"total"</span><span class="p">]]</span>
+
+
+<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">"paper"</span><span class="p">:</span> <span class="n">paper</span><span class="p">,</span>
+        <span class="s2">"stated criteria"</span><span class="p">:</span> <span class="n">cohort_counts</span><span class="p">(</span><span class="s2">"stated"</span><span class="p">),</span>
+        <span class="s2">"reproduced rule"</span><span class="p">:</span> <span class="n">cohort_counts</span><span class="p">(</span><span class="s2">"reproduced"</span><span class="p">),</span>
+    <span class="p">},</span>
+    <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="2" halign="left">paper</th>
+      <th colspan="2" halign="left">stated criteria</th>
+      <th colspan="2" halign="left">reproduced rule</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>n</th>
+      <th>azoospermic</th>
+      <th>n</th>
+      <th>azoospermic</th>
+      <th>n</th>
+      <th>azoospermic</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>miami</th>
+      <td>946</td>
+      <td>131</td>
+      <td>943</td>
+      <td>129</td>
+      <td>946</td>
+      <td>131</td>
+    </tr>
+    <tr>
+      <th>milan</th>
+      <td>1955</td>
+      <td>465</td>
+      <td>1955</td>
+      <td>465</td>
+      <td>1955</td>
+      <td>465</td>
+    </tr>
+    <tr>
+      <th>chicago</th>
+      <td>596</td>
+      <td>191</td>
+      <td>614</td>
+      <td>197</td>
+      <td>596</td>
+      <td>191</td>
+    </tr>
+    <tr>
+      <th>total</th>
+      <td>3497</td>
+      <td>787</td>
+      <td>3512</td>
+      <td>791</td>
+      <td>3497</td>
+      <td>787</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="table-1">
+<h2>2. Table 1<a class="headerlink" href="#table-1" title="Link to this heading"></a></h2>
+<p>Reproduced with <code class="docutils literal notranslate"><span class="pre">eda_toolkit.generate_table1</span></code>, one call per site, with the
+paper’s reference-range categories (built in <code class="docutils literal notranslate"><span class="pre">preprocessing.py</span></code>). Boundary
+values belong to the normal range.</p>
+<p>Two cells do not match the printed table and cannot be made to:</p>
+<ul class="simple">
+<li><p><strong>Milan FSH categories.</strong> The paper reports 1,453 normal / 54 low / 448 high.
+The deposit’s Milan sheet carries a precomputed FSH category whose “high”
+group starts at 12.5 IU/L, Milan’s own laboratory limit, not the 7.6 stated
+in the Methods. On a single 7.6 cutoff the counts are 1,162 / 54 / 739, and
+the Total column changes accordingly.</p></li>
+<li><p><strong>Chicago testis volume.</strong> The paper reports a median of 14.8 (10.1-17.4) mL
+with a normal spread across the size categories. The deposit holds raw
+ultrasound measurements with a median of 4.5 (4.0-4.8), evidently in cm.
+The authors converted to volume before analysis; the conversion is not
+recoverable from the deposited file.</p></li>
+</ul>
+<p>Everything else matches to the row or within one boundary value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">eda_toolkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_table1</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">"../data/processed/reproduced/tradewell_2022.parquet"</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"included"</span><span class="p">]]</span>
+
+<span class="n">continuous</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"age"</span><span class="p">,</span>
+    <span class="s2">"sperm_concentration"</span><span class="p">,</span>
+    <span class="s2">"fsh"</span><span class="p">,</span>
+    <span class="s2">"lh"</span><span class="p">,</span>
+    <span class="s2">"testosterone"</span><span class="p">,</span>
+    <span class="s2">"testis_volume"</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">categorical</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"azoospermia"</span><span class="p">,</span> <span class="s2">"fsh_cat"</span><span class="p">,</span> <span class="s2">"lh_cat"</span><span class="p">,</span> <span class="s2">"tt_cat"</span><span class="p">,</span> <span class="s2">"vol_cat"</span><span class="p">]</span>
+
+<span class="c1"># Rounding per variable, as printed in the paper's Table 1</span>
+<span class="n">decimals</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"age"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"sperm_concentration"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"fsh"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"lh"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"testosterone"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"testis_volume"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># Paper-style row labels and order</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"age"</span><span class="p">:</span> <span class="s2">"Age (y)"</span><span class="p">,</span>
+    <span class="s2">"sperm_concentration"</span><span class="p">:</span> <span class="s2">"Sperm concentration (mil/mL)"</span><span class="p">,</span>
+    <span class="s2">"azoospermia = 1"</span><span class="p">:</span> <span class="s2">"  Azoospermic"</span><span class="p">,</span>
+    <span class="s2">"fsh"</span><span class="p">:</span> <span class="s2">"FSH (IU/L)"</span><span class="p">,</span>
+    <span class="s2">"lh"</span><span class="p">:</span> <span class="s2">"LH (IU/L)"</span><span class="p">,</span>
+    <span class="s2">"testosterone"</span><span class="p">:</span> <span class="s2">"TT (ng/dL)"</span><span class="p">,</span>
+    <span class="s2">"testis_volume"</span><span class="p">:</span> <span class="s2">"Mean testis size (cm3)"</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">header_rows</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"azoospermia"</span><span class="p">,</span>
+    <span class="s2">"azoospermia = 0"</span><span class="p">,</span>
+    <span class="s2">"fsh_cat"</span><span class="p">,</span>
+    <span class="s2">"lh_cat"</span><span class="p">,</span>
+    <span class="s2">"tt_cat"</span><span class="p">,</span>
+    <span class="s2">"vol_cat"</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">order</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"Number of samples"</span><span class="p">,</span>
+    <span class="s2">"Age (y)"</span><span class="p">,</span>
+    <span class="s2">"Sperm concentration (mil/mL)"</span><span class="p">,</span>
+    <span class="s2">"  Azoospermic"</span><span class="p">,</span>
+    <span class="s2">"FSH (IU/L)"</span><span class="p">,</span>
+    <span class="s2">"  Normal (1.5-7.6)"</span><span class="p">,</span>
+    <span class="s2">"  Low (&lt;1.5)"</span><span class="p">,</span>
+    <span class="s2">"  High (&gt;7.6)"</span><span class="p">,</span>
+    <span class="s2">"LH (IU/L)"</span><span class="p">,</span>
+    <span class="s2">"  Normal (1.7-8.6)"</span><span class="p">,</span>
+    <span class="s2">"  Low (&lt;1.7)"</span><span class="p">,</span>
+    <span class="s2">"  High (&gt;8.6)"</span><span class="p">,</span>
+    <span class="s2">"TT (ng/dL)"</span><span class="p">,</span>
+    <span class="s2">"  Normal (300-1,000)"</span><span class="p">,</span>
+    <span class="s2">"  Low (&lt;300)"</span><span class="p">,</span>
+    <span class="s2">"  High (&gt;1,000)"</span><span class="p">,</span>
+    <span class="s2">"Mean testis size (cm3)"</span><span class="p">,</span>
+    <span class="s2">"  Normal (12.5-19)"</span><span class="p">,</span>
+    <span class="s2">"  Small (&lt;12.5)"</span><span class="p">,</span>
+    <span class="s2">"  Large (&gt;19)"</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">cols</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">"Miami"</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">site</span> <span class="o">==</span> <span class="s2">"miami"</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s2">"Milan"</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">site</span> <span class="o">==</span> <span class="s2">"milan"</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s2">"Chicago"</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">site</span> <span class="o">==</span> <span class="s2">"chicago"</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s2">"Total"</span><span class="p">,</span> <span class="n">df</span><span class="p">),</span>
+<span class="p">]:</span>
+    <span class="n">cont</span><span class="p">,</span> <span class="n">cat</span> <span class="o">=</span> <span class="n">generate_table1</span><span class="p">(</span>
+        <span class="n">g</span><span class="p">,</span>
+        <span class="n">continuous_cols</span><span class="o">=</span><span class="n">continuous</span><span class="p">,</span>
+        <span class="n">categorical_cols</span><span class="o">=</span><span class="n">categorical</span><span class="p">,</span>
+        <span class="n">combine</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">value_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">decimal_places</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">cont</span><span class="p">,</span> <span class="n">cat</span> <span class="o">=</span> <span class="n">cont</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">cat</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># unwrap TableWrapper</span>
+
+    <span class="c1"># median (IQR); generate_table1 reports median but not IQR</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="n">continuous</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">cont</span><span class="p">[</span><span class="s2">"Overall"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">q</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">]</span><span class="si">:</span><span class="s2">.</span><span class="si">{</span><span class="n">decimals</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="si">}</span><span class="s2">f</span><span class="si">}</span><span class="s2"> "</span>
+        <span class="sa">f</span><span class="s2">"(</span><span class="si">{</span><span class="n">q</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="mf">0.25</span><span class="p">]</span><span class="si">:</span><span class="s2">.</span><span class="si">{</span><span class="n">decimals</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="si">}</span><span class="s2">f</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">q</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="mf">0.75</span><span class="p">]</span><span class="si">:</span><span class="s2">.</span><span class="si">{</span><span class="n">decimals</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="si">}</span><span class="s2">f</span><span class="si">}</span><span class="s2">)"</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">cont</span><span class="p">[</span><span class="s2">"Variable"</span><span class="p">]</span>
+    <span class="p">]</span>
+
+    <span class="n">t</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">cont</span><span class="p">,</span> <span class="n">cat</span><span class="p">])[[</span><span class="s2">"Variable"</span><span class="p">,</span> <span class="s2">"Overall"</span><span class="p">]]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"Variable"</span><span class="p">)[</span><span class="s2">"Overall"</span><span class="p">]</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"Number of samples"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span>
+    <span class="n">cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+
+<span class="n">table1</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">cols</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">header_rows</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+        <span class="n">index</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">labels</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s2">"  "</span> <span class="o">+</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">" = "</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="s2">" = "</span> <span class="ow">in</span> <span class="n">s</span> <span class="k">else</span> <span class="n">s</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">table1</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">"Variable"</span>
+<span class="n">table1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Miami</th>
+      <th>Milan</th>
+      <th>Chicago</th>
+      <th>Total</th>
+    </tr>
+    <tr>
+      <th>Variable</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Number of samples</th>
+      <td>946</td>
+      <td>1,955</td>
+      <td>596</td>
+      <td>3,497</td>
+    </tr>
+    <tr>
+      <th>Age (y)</th>
+      <td>35 (30-40)</td>
+      <td>37 (33-41)</td>
+      <td>35 (32-39)</td>
+      <td>36 (32-40)</td>
+    </tr>
+    <tr>
+      <th>Sperm concentration (mil/mL)</th>
+      <td>13.0 (1.3-22.0)</td>
+      <td>6.0 (0.1-25.0)</td>
+      <td>4.0 (0.0-25.3)</td>
+      <td>7.6 (0.2-23.8)</td>
+    </tr>
+    <tr>
+      <th>Azoospermic</th>
+      <td>131 (13.8%)</td>
+      <td>465 (23.8%)</td>
+      <td>191 (32.0%)</td>
+      <td>787 (22.5%)</td>
+    </tr>
+    <tr>
+      <th>FSH (IU/L)</th>
+      <td>5.1 (3.3-8.7)</td>
+      <td>5.7 (3.4-11.3)</td>
+      <td>6.4 (3.8-12.2)</td>
+      <td>5.7 (3.4-10.6)</td>
+    </tr>
+    <tr>
+      <th>Normal (1.5-7.6)</th>
+      <td>608 (64.3%)</td>
+      <td>1,162 (59.4%)</td>
+      <td>334 (56.0%)</td>
+      <td>2,104 (60.2%)</td>
+    </tr>
+    <tr>
+      <th>Low (&lt;1.5)</th>
+      <td>51 (5.4%)</td>
+      <td>54 (2.8%)</td>
+      <td>16 (2.7%)</td>
+      <td>121 (3.5%)</td>
+    </tr>
+    <tr>
+      <th>High (&gt;7.6)</th>
+      <td>287 (30.3%)</td>
+      <td>739 (37.8%)</td>
+      <td>246 (41.3%)</td>
+      <td>1,272 (36.4%)</td>
+    </tr>
+    <tr>
+      <th>LH (IU/L)</th>
+      <td>4.5 (3.3-6.1)</td>
+      <td>4.3 (3.0-6.1)</td>
+      <td>4.6 (3.4-6.8)</td>
+      <td>4.5 (3.1-6.2)</td>
+    </tr>
+    <tr>
+      <th>Normal (1.7-8.6)</th>
+      <td>794 (83.9%)</td>
+      <td>1,648 (84.3%)</td>
+      <td>486 (81.5%)</td>
+      <td>2,928 (83.7%)</td>
+    </tr>
+    <tr>
+      <th>Low (&lt;1.7)</th>
+      <td>58 (6.1%)</td>
+      <td>96 (4.9%)</td>
+      <td>23 (3.9%)</td>
+      <td>177 (5.1%)</td>
+    </tr>
+    <tr>
+      <th>High (&gt;8.6)</th>
+      <td>94 (9.9%)</td>
+      <td>211 (10.8%)</td>
+      <td>87 (14.6%)</td>
+      <td>392 (11.2%)</td>
+    </tr>
+    <tr>
+      <th>TT (ng/dL)</th>
+      <td>400 (301-530)</td>
+      <td>456 (351-576)</td>
+      <td>362 (263-487)</td>
+      <td>429 (320-547)</td>
+    </tr>
+    <tr>
+      <th>Normal (300-1,000)</th>
+      <td>695 (73.5%)</td>
+      <td>1,642 (84.0%)</td>
+      <td>385 (64.6%)</td>
+      <td>2,722 (77.8%)</td>
+    </tr>
+    <tr>
+      <th>Low (&lt;300)</th>
+      <td>233 (24.6%)</td>
+      <td>292 (14.9%)</td>
+      <td>205 (34.4%)</td>
+      <td>730 (20.9%)</td>
+    </tr>
+    <tr>
+      <th>High (&gt;1,000)</th>
+      <td>18 (1.9%)</td>
+      <td>21 (1.1%)</td>
+      <td>6 (1.0%)</td>
+      <td>45 (1.3%)</td>
+    </tr>
+    <tr>
+      <th>Mean testis size (cm3)</th>
+      <td>14 (12-16)</td>
+      <td>15 (12-20)</td>
+      <td>4 (4-5)</td>
+      <td>14 (9-17)</td>
+    </tr>
+    <tr>
+      <th>Normal (12.5-19)</th>
+      <td>533 (56.3%)</td>
+      <td>885 (45.3%)</td>
+      <td>0 (0.0%)</td>
+      <td>1,418 (40.5%)</td>
+    </tr>
+    <tr>
+      <th>Small (&lt;12.5)</th>
+      <td>322 (34.0%)</td>
+      <td>505 (25.8%)</td>
+      <td>596 (100.0%)</td>
+      <td>1,423 (40.7%)</td>
+    </tr>
+    <tr>
+      <th>Large (&gt;19)</th>
+      <td>91 (9.6%)</td>
+      <td>565 (28.9%)</td>
+      <td>0 (0.0%)</td>
+      <td>656 (18.8%)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="refit-on-the-miami-development-cohort">
+<h2>3. Refit on the Miami development cohort<a class="headerlink" href="#refit-on-the-miami-development-cohort" title="Link to this heading"></a></h2>
+<p>The paper prints the logistic coefficients to one or two significant figures.
+Refitting the same model (age, FSH, LH, total testosterone, mean testis volume)
+on the reconstructed 946-row Miami cohort recovers them within rounding, and
+gives the full-precision values and standard errors the paper omits. Every
+published coefficient lies within one standard error of the refit.</p>
+<p>A properly fitted logistic intercept makes the mean predicted probability
+equal the observed rate; the rounded published intercept does not (15.2%
+predicted vs 13.8% observed on Miami). That gap is the first component of the
+calibration problem examined in section 4.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">seminal</span><span class="w"> </span><span class="kn">import</span> <span class="n">LR_COEFS</span><span class="p">,</span> <span class="n">add_azoospermia_risk_cols</span>
+
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"age"</span><span class="p">,</span> <span class="s2">"fsh"</span><span class="p">,</span> <span class="s2">"lh"</span><span class="p">,</span> <span class="s2">"testosterone"</span><span class="p">,</span> <span class="s2">"testis_volume"</span><span class="p">]</span>
+<span class="n">miami</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">site</span> <span class="o">==</span> <span class="s2">"miami"</span><span class="p">]</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">miami</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
+<span class="n">fit</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">Logit</span><span class="p">(</span><span class="n">miami</span><span class="p">[</span><span class="s2">"azoospermia"</span><span class="p">],</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">disp</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">comparison</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">"paper (Table 3)"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">LR_COEFS</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s2">"intercept"</span><span class="p">:</span> <span class="s2">"const"</span><span class="p">}),</span>
+        <span class="s2">"refit"</span><span class="p">:</span> <span class="n">fit</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+        <span class="s2">"SE"</span><span class="p">:</span> <span class="n">fit</span><span class="o">.</span><span class="n">bse</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+        <span class="s2">"OR"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">comparison</span><span class="p">[</span><span class="s2">"within 1 SE"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">comparison</span><span class="p">[</span><span class="s2">"paper (Table 3)"</span><span class="p">]</span> <span class="o">-</span> <span class="n">comparison</span><span class="p">[</span><span class="s2">"refit"</span><span class="p">]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">comparison</span><span class="p">[</span><span class="s2">"SE"</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"n = </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">fit</span><span class="o">.</span><span class="n">nobs</span><span class="p">)</span><span class="si">}</span><span class="s2">, events = </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">miami</span><span class="p">[</span><span class="s1">'azoospermia'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">comparison</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n = 946, events = 131
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>paper (Table 3)</th>
+      <th>refit</th>
+      <th>SE</th>
+      <th>OR</th>
+      <th>within 1 SE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>const</th>
+      <td>-1.900</td>
+      <td>-1.7735</td>
+      <td>0.7294</td>
+      <td>0.170</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>age</th>
+      <td>0.020</td>
+      <td>0.0197</td>
+      <td>0.0137</td>
+      <td>1.020</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>fsh</th>
+      <td>0.130</td>
+      <td>0.1160</td>
+      <td>0.0197</td>
+      <td>1.123</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>lh</th>
+      <td>0.030</td>
+      <td>0.0423</td>
+      <td>0.0361</td>
+      <td>1.043</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>testosterone</th>
+      <td>-0.002</td>
+      <td>-0.0026</td>
+      <td>0.0007</td>
+      <td>0.997</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>testis_volume</th>
+      <td>-0.080</td>
+      <td>-0.0766</td>
+      <td>0.0320</td>
+      <td>0.926</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Does the rounding matter for predictions? Discrimination is unchanged; the
+mean predicted probability moves by 1 to 3 points, and on Miami the refit
+matches the observed rate exactly, as it must.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">roc_auc_score</span>
+
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"miami"</span><span class="p">,</span> <span class="s2">"milan"</span><span class="p">,</span> <span class="s2">"chicago"</span><span class="p">]:</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">site</span> <span class="o">==</span> <span class="n">site</span><span class="p">]</span>
+    <span class="n">p_pub</span> <span class="o">=</span> <span class="n">add_azoospermia_risk_cols</span><span class="p">(</span><span class="n">g</span><span class="p">)[</span><span class="s2">"azoo_lr"</span><span class="p">]</span>
+    <span class="n">p_ref</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="n">features</span><span class="p">]))</span>
+    <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">"site"</span><span class="p">:</span> <span class="n">site</span><span class="p">,</span>
+            <span class="s2">"AUC published"</span><span class="p">:</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="s2">"azoospermia"</span><span class="p">],</span> <span class="n">p_pub</span><span class="p">),</span>
+            <span class="s2">"AUC refit"</span><span class="p">:</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="s2">"azoospermia"</span><span class="p">],</span> <span class="n">p_ref</span><span class="p">),</span>
+            <span class="s2">"mean pred published"</span><span class="p">:</span> <span class="n">p_pub</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+            <span class="s2">"mean pred refit"</span><span class="p">:</span> <span class="n">p_ref</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+            <span class="s2">"observed"</span><span class="p">:</span> <span class="n">g</span><span class="p">[</span><span class="s2">"azoospermia"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"site"</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AUC published</th>
+      <th>AUC refit</th>
+      <th>mean pred published</th>
+      <th>mean pred refit</th>
+      <th>observed</th>
+    </tr>
+    <tr>
+      <th>site</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>miami</th>
+      <td>0.779</td>
+      <td>0.780</td>
+      <td>0.152</td>
+      <td>0.138</td>
+      <td>0.138</td>
+    </tr>
+    <tr>
+      <th>milan</th>
+      <td>0.786</td>
+      <td>0.784</td>
+      <td>0.183</td>
+      <td>0.164</td>
+      <td>0.238</td>
+    </tr>
+    <tr>
+      <th>chicago</th>
+      <td>0.718</td>
+      <td>0.724</td>
+      <td>0.314</td>
+      <td>0.288</td>
+      <td>0.320</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="external-validation-in-depth">
+<h2>4. External validation in depth<a class="headerlink" href="#external-validation-in-depth" title="Link to this heading"></a></h2>
+<p>The paper reports discrimination (AUC) on the external sites and calibration
+only as within-site cross-validation, which refits the model on each site’s
+own data. Here the published coefficients are applied as-is, the way a
+clinician using the calculator would.</p>
+<p><strong>Calibration-in-the-large and slope.</strong> Regress the observed outcome on the
+model’s predicted log-odds. The intercept (CITL) is 0 when predictions are
+right on average and positive when the model underpredicts. The slope is 1
+when predictions are as spread out as they should be and below 1 when the
+model is over-confident (extreme predictions should be pulled toward the
+middle).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">brier_score_loss</span>
+
+<span class="n">scored</span> <span class="o">=</span> <span class="n">add_azoospermia_risk_cols</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">citl_slope</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Calibration-in-the-large and calibration slope on the logit scale."""</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">1e-6</span><span class="p">)</span>
+    <span class="n">lp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">))</span>
+    <span class="n">citl</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">Logit</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)),</span> <span class="n">offset</span><span class="o">=</span><span class="n">lp</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">disp</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">slope</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">Logit</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">lp</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">disp</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">citl</span><span class="p">,</span> <span class="n">slope</span>
+
+
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"miami"</span><span class="p">,</span> <span class="s2">"milan"</span><span class="p">,</span> <span class="s2">"chicago"</span><span class="p">]:</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">scored</span><span class="p">[</span><span class="n">scored</span><span class="o">.</span><span class="n">site</span> <span class="o">==</span> <span class="n">site</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">model</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"logistic"</span><span class="p">,</span> <span class="s2">"azoo_lr"</span><span class="p">),</span> <span class="p">(</span><span class="s2">"FSH-only"</span><span class="p">,</span> <span class="s2">"azoo_fsh"</span><span class="p">)]:</span>
+        <span class="n">citl</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">citl_slope</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="s2">"azoospermia"</span><span class="p">],</span> <span class="n">g</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">"site"</span><span class="p">:</span> <span class="n">site</span><span class="p">,</span>
+                <span class="s2">"model"</span><span class="p">:</span> <span class="n">model</span><span class="p">,</span>
+                <span class="s2">"AUC"</span><span class="p">:</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="s2">"azoospermia"</span><span class="p">],</span> <span class="n">g</span><span class="p">[</span><span class="n">col</span><span class="p">]),</span>
+                <span class="s2">"Brier"</span><span class="p">:</span> <span class="n">brier_score_loss</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="s2">"azoospermia"</span><span class="p">],</span> <span class="n">g</span><span class="p">[</span><span class="n">col</span><span class="p">]),</span>
+                <span class="s2">"CITL"</span><span class="p">:</span> <span class="n">citl</span><span class="p">,</span>
+                <span class="s2">"slope"</span><span class="p">:</span> <span class="n">slope</span><span class="p">,</span>
+                <span class="s2">"mean predicted"</span><span class="p">:</span> <span class="n">g</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+                <span class="s2">"observed"</span><span class="p">:</span> <span class="n">g</span><span class="p">[</span><span class="s2">"azoospermia"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s2">"site"</span><span class="p">,</span> <span class="s2">"model"</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>AUC</th>
+      <th>Brier</th>
+      <th>CITL</th>
+      <th>slope</th>
+      <th>mean predicted</th>
+      <th>observed</th>
+    </tr>
+    <tr>
+      <th>site</th>
+      <th>model</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">miami</th>
+      <th>logistic</th>
+      <td>0.779</td>
+      <td>0.090</td>
+      <td>-0.149</td>
+      <td>0.955</td>
+      <td>0.152</td>
+      <td>0.138</td>
+    </tr>
+    <tr>
+      <th>FSH-only</th>
+      <td>0.763</td>
+      <td>0.094</td>
+      <td>-0.133</td>
+      <td>0.855</td>
+      <td>0.151</td>
+      <td>0.138</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">milan</th>
+      <th>logistic</th>
+      <td>0.786</td>
+      <td>0.137</td>
+      <td>0.524</td>
+      <td>0.728</td>
+      <td>0.183</td>
+      <td>0.238</td>
+    </tr>
+    <tr>
+      <th>FSH-only</th>
+      <td>0.786</td>
+      <td>0.138</td>
+      <td>0.330</td>
+      <td>0.339</td>
+      <td>0.200</td>
+      <td>0.238</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">chicago</th>
+      <th>logistic</th>
+      <td>0.718</td>
+      <td>0.178</td>
+      <td>0.043</td>
+      <td>0.702</td>
+      <td>0.314</td>
+      <td>0.320</td>
+    </tr>
+    <tr>
+      <th>FSH-only</th>
+      <td>0.707</td>
+      <td>0.197</td>
+      <td>0.853</td>
+      <td>0.230</td>
+      <td>0.207</td>
+      <td>0.320</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Two things stand out. The FSH-only quadratic is badly over-confident on both
+external sites (slope 0.2 to 0.3): it reaches 100% by FSH 30 while observed
+rates at that FSH are nearer 70 to 80%. That is a structural property of
+fitting a parabola to binned proportions, not a transport problem. The
+logistic model’s slope of about 0.7 is ordinary shrinkage.</p>
+<p><strong>Chicago’s testis volumes.</strong> The deposit holds Chicago volumes in cm (median
+4.5) where the paper’s Table 1 reports mL (median 14.8). The logistic model
+multiplies volume by -0.08, so the small numbers inflate every Chicago
+prediction. The experiment below replaces Chicago’s volumes with values on the
+mL scale and re-evaluates.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chicago_raw</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">site</span> <span class="o">==</span> <span class="s2">"chicago"</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">vol</span> <span class="ow">in</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">"as deposited (cm, median 4.5)"</span><span class="p">,</span> <span class="n">chicago_raw</span><span class="p">[</span><span class="s2">"testis_volume"</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s2">"all set to paper's Chicago median, 14.8 mL"</span><span class="p">,</span> <span class="mf">14.8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"all set to Miami median, 14 mL"</span><span class="p">,</span> <span class="mf">14.0</span><span class="p">),</span>
+<span class="p">]:</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">chicago_raw</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">g</span><span class="p">[</span><span class="s2">"testis_volume"</span><span class="p">]</span> <span class="o">=</span> <span class="n">vol</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">add_azoospermia_risk_cols</span><span class="p">(</span><span class="n">g</span><span class="p">)[</span><span class="s2">"azoo_lr"</span><span class="p">]</span>
+    <span class="n">citl</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">citl_slope</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="s2">"azoospermia"</span><span class="p">],</span> <span class="n">p</span><span class="p">)</span>
+    <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">"Chicago volumes"</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span>
+            <span class="s2">"AUC"</span><span class="p">:</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="s2">"azoospermia"</span><span class="p">],</span> <span class="n">p</span><span class="p">),</span>
+            <span class="s2">"CITL"</span><span class="p">:</span> <span class="n">citl</span><span class="p">,</span>
+            <span class="s2">"slope"</span><span class="p">:</span> <span class="n">slope</span><span class="p">,</span>
+            <span class="s2">"mean predicted"</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+            <span class="s2">"observed"</span><span class="p">:</span> <span class="n">g</span><span class="p">[</span><span class="s2">"azoospermia"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"Chicago volumes"</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AUC</th>
+      <th>CITL</th>
+      <th>slope</th>
+      <th>mean predicted</th>
+      <th>observed</th>
+    </tr>
+    <tr>
+      <th>Chicago volumes</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>as deposited (cm, median 4.5)</th>
+      <td>0.718</td>
+      <td>0.043</td>
+      <td>0.702</td>
+      <td>0.314</td>
+      <td>0.32</td>
+    </tr>
+    <tr>
+      <th>all set to paper's Chicago median, 14.8 mL</th>
+      <td>0.715</td>
+      <td>0.884</td>
+      <td>0.711</td>
+      <td>0.201</td>
+      <td>0.32</td>
+    </tr>
+    <tr>
+      <th>all set to Miami median, 14 mL</th>
+      <td>0.715</td>
+      <td>0.820</td>
+      <td>0.711</td>
+      <td>0.208</td>
+      <td>0.32</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>With cm volumes the Chicago logistic model looks calibrated on average (CITL
+near 0). That is an accident: volumes three times too small make every man
+look small-testicled, which raises predictions by just enough to offset
+Chicago’s higher prevalence. On the mL scale the model underpredicts there by
+the same margin as in Milan (CITL about +0.8). Discrimination is unaffected
+either way, which is why the AUC comparison in the paper could not reveal it.</p>
+<p><strong>Decision curves</strong> (Vickers net benefit via <code class="docutils literal notranslate"><span class="pre">dcurves</span></code>). Net benefit at each
+risk threshold, against the two default strategies of treating everyone as azoospermic or no one. A model is
+useful at a threshold only where its curve sits above both.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dcurves</span><span class="w"> </span><span class="kn">import</span> <span class="n">dca</span>
+
+<span class="n">thresholds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.61</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">site</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="p">[</span><span class="s2">"milan"</span><span class="p">,</span> <span class="s2">"chicago"</span><span class="p">]):</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">scored</span><span class="p">[</span><span class="n">scored</span><span class="o">.</span><span class="n">site</span> <span class="o">==</span> <span class="n">site</span><span class="p">][[</span><span class="s2">"azoospermia"</span><span class="p">,</span> <span class="s2">"azoo_lr"</span><span class="p">,</span> <span class="s2">"azoo_fsh"</span><span class="p">]]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+        <span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"azoo_lr"</span><span class="p">:</span> <span class="s2">"Logistic"</span><span class="p">,</span> <span class="s2">"azoo_fsh"</span><span class="p">:</span> <span class="s2">"FSH-only"</span><span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">dca_df</span> <span class="o">=</span> <span class="n">dca</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">g</span><span class="p">,</span>
+        <span class="n">outcome</span><span class="o">=</span><span class="s2">"azoospermia"</span><span class="p">,</span>
+        <span class="n">modelnames</span><span class="o">=</span><span class="p">[</span><span class="s2">"Logistic"</span><span class="p">,</span> <span class="s2">"FSH-only"</span><span class="p">],</span>
+        <span class="n">thresholds</span><span class="o">=</span><span class="n">thresholds</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">style</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"Logistic"</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(),</span>
+        <span class="s2">"FSH-only"</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(),</span>
+        <span class="s2">"all"</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">"grey"</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Treat all"</span><span class="p">),</span>
+        <span class="s2">"none"</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">"black"</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Treat none"</span><span class="p">),</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">grp</span> <span class="ow">in</span> <span class="n">dca_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"model"</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grp</span><span class="p">[</span><span class="s2">"threshold"</span><span class="p">],</span> <span class="n">grp</span><span class="p">[</span><span class="s2">"net_benefit"</span><span class="p">],</span> <span class="o">**</span><span class="p">{</span><span class="s2">"label"</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">style</span><span class="p">[</span><span class="n">name</span><span class="p">]})</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">site</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2"> (prevalence </span><span class="si">{</span><span class="n">g</span><span class="p">[</span><span class="s1">'azoospermia'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Risk threshold"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Net benefit"</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b9e6f5b1dd57d2de4374c15445f513be3f59d3addf2e4feb1d6acfccfcc849a1.png" src="../_images/b9e6f5b1dd57d2de4374c15445f513be3f59d3addf2e4feb1d6acfccfcc849a1.png" />
+</div>
+</div>
+</section>
+<section id="recalibration-per-site">
+<h2>5. Recalibration per site<a class="headerlink" href="#recalibration-per-site" title="Link to this heading"></a></h2>
+<p>Two standard updates, applied to each external site and evaluated on it
+(apparent performance; the point is to show how much of the gap each step
+closes, not to produce a new validated model):</p>
+<ul class="simple">
+<li><p><strong>Intercept-only.</strong> Shift every prediction by a constant on the log-odds
+scale so the mean matches the local prevalence. Needs only the site’s
+azoospermia rate, which any clinic knows.</p></li>
+<li><p><strong>Intercept and slope.</strong> Also rescale the spread of the predictions
+(logistic recalibration).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">recalibrate</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Return predictions after intercept-only and intercept+slope updates."""</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">1e-6</span><span class="p">)</span>
+    <span class="n">lp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">))</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">Logit</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)),</span> <span class="n">offset</span><span class="o">=</span><span class="n">lp</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">disp</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ab</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">Logit</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">lp</span><span class="p">))</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">disp</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">params</span>
+    <span class="n">p_int</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">lp</span> <span class="o">+</span> <span class="n">a</span><span class="p">)))</span>
+    <span class="n">p_full</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">ab</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">ab</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">lp</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">p_int</span><span class="p">,</span> <span class="n">p_full</span>
+
+
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"milan"</span><span class="p">,</span> <span class="s2">"chicago"</span><span class="p">]:</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">scored</span><span class="p">[</span><span class="n">scored</span><span class="o">.</span><span class="n">site</span> <span class="o">==</span> <span class="n">site</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="s2">"azoospermia"</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">model</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"logistic"</span><span class="p">,</span> <span class="s2">"azoo_lr"</span><span class="p">),</span> <span class="p">(</span><span class="s2">"FSH-only"</span><span class="p">,</span> <span class="s2">"azoo_fsh"</span><span class="p">)]:</span>
+        <span class="n">p_int</span><span class="p">,</span> <span class="n">p_full</span> <span class="o">=</span> <span class="n">recalibrate</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">g</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">step</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s2">"as published"</span><span class="p">,</span> <span class="n">g</span><span class="p">[</span><span class="n">col</span><span class="p">]),</span>
+            <span class="p">(</span><span class="s2">"intercept-only"</span><span class="p">,</span> <span class="n">p_int</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"intercept + slope"</span><span class="p">,</span> <span class="n">p_full</span><span class="p">),</span>
+        <span class="p">]:</span>
+            <span class="n">citl</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">citl_slope</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+            <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">"site"</span><span class="p">:</span> <span class="n">site</span><span class="p">,</span>
+                    <span class="s2">"model"</span><span class="p">:</span> <span class="n">model</span><span class="p">,</span>
+                    <span class="s2">"update"</span><span class="p">:</span> <span class="n">step</span><span class="p">,</span>
+                    <span class="s2">"Brier"</span><span class="p">:</span> <span class="n">brier_score_loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span>
+                    <span class="s2">"CITL"</span><span class="p">:</span> <span class="n">citl</span><span class="p">,</span>
+                    <span class="s2">"slope"</span><span class="p">:</span> <span class="n">slope</span><span class="p">,</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s2">"site"</span><span class="p">,</span> <span class="s2">"model"</span><span class="p">,</span> <span class="s2">"update"</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>Brier</th>
+      <th>CITL</th>
+      <th>slope</th>
+    </tr>
+    <tr>
+      <th>site</th>
+      <th>model</th>
+      <th>update</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="6" valign="top">milan</th>
+      <th rowspan="3" valign="top">logistic</th>
+      <th>as published</th>
+      <td>0.137</td>
+      <td>0.524</td>
+      <td>0.728</td>
+    </tr>
+    <tr>
+      <th>intercept-only</th>
+      <td>0.133</td>
+      <td>0.000</td>
+      <td>0.728</td>
+    </tr>
+    <tr>
+      <th>intercept + slope</th>
+      <td>0.133</td>
+      <td>0.000</td>
+      <td>1.000</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">FSH-only</th>
+      <th>as published</th>
+      <td>0.138</td>
+      <td>0.330</td>
+      <td>0.339</td>
+    </tr>
+    <tr>
+      <th>intercept-only</th>
+      <td>0.135</td>
+      <td>0.000</td>
+      <td>0.348</td>
+    </tr>
+    <tr>
+      <th>intercept + slope</th>
+      <td>0.148</td>
+      <td>-0.000</td>
+      <td>1.000</td>
+    </tr>
+    <tr>
+      <th rowspan="6" valign="top">chicago</th>
+      <th rowspan="3" valign="top">logistic</th>
+      <th>as published</th>
+      <td>0.178</td>
+      <td>0.043</td>
+      <td>0.702</td>
+    </tr>
+    <tr>
+      <th>intercept-only</th>
+      <td>0.178</td>
+      <td>0.000</td>
+      <td>0.702</td>
+    </tr>
+    <tr>
+      <th>intercept + slope</th>
+      <td>0.177</td>
+      <td>0.000</td>
+      <td>1.000</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">FSH-only</th>
+      <th>as published</th>
+      <td>0.197</td>
+      <td>0.853</td>
+      <td>0.230</td>
+    </tr>
+    <tr>
+      <th>intercept-only</th>
+      <td>0.180</td>
+      <td>0.000</td>
+      <td>0.247</td>
+    </tr>
+    <tr>
+      <th>intercept + slope</th>
+      <td>0.194</td>
+      <td>0.000</td>
+      <td>1.000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>For the logistic model the intercept shift does most of the work (Milan Brier
+0.137 to 0.133); the slope adds nothing further.</p>
+<p>For the FSH-only quadratic the intercept+slope update <em>worsens</em> the Brier
+score. The quadratic outputs exactly 1.0 for every man with FSH above about
+30 IU/L, which is an infinite log-odds; those rows dominate any logit-scale
+recalibration, and the result depends on an arbitrary clipping choice. A
+polynomial in probability cannot be recalibrated the way a logistic model can.</p>
+<p><strong>A logistic FSH-only alternative.</strong> Fit <code class="docutils literal notranslate"><span class="pre">logit(p)</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span> <span class="pre">*</span> <span class="pre">FSH</span></code> on the
+Miami development cohort and validate it on Milan and Chicago alongside the
+published quadratic. Two parameters, the same inputs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">miami</span> <span class="o">=</span> <span class="n">scored</span><span class="p">[</span><span class="n">scored</span><span class="o">.</span><span class="n">site</span> <span class="o">==</span> <span class="s2">"miami"</span><span class="p">]</span>
+<span class="n">fsh_logit</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">Logit</span><span class="p">(</span><span class="n">miami</span><span class="p">[</span><span class="s2">"azoospermia"</span><span class="p">],</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">miami</span><span class="p">[</span><span class="s2">"fsh"</span><span class="p">]))</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">disp</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">fsh_logit</span><span class="o">.</span><span class="n">params</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"logit(p) = </span><span class="si">{</span><span class="n">a</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> + </span><span class="si">{</span><span class="n">b</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> * FSH    (fit on Miami, n=</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">fsh_logit</span><span class="o">.</span><span class="n">nobs</span><span class="p">)</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"milan"</span><span class="p">,</span> <span class="s2">"chicago"</span><span class="p">]:</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">scored</span><span class="p">[</span><span class="n">scored</span><span class="o">.</span><span class="n">site</span> <span class="o">==</span> <span class="n">site</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="s2">"azoospermia"</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">"quadratic (paper)"</span><span class="p">,</span> <span class="n">g</span><span class="p">[</span><span class="s2">"azoo_fsh"</span><span class="p">]),</span>
+        <span class="p">(</span><span class="s2">"logistic in FSH"</span><span class="p">,</span> <span class="n">fsh_logit</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="s2">"fsh"</span><span class="p">]))),</span>
+    <span class="p">]:</span>
+        <span class="n">citl</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">citl_slope</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">"site"</span><span class="p">:</span> <span class="n">site</span><span class="p">,</span>
+                <span class="s2">"model"</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                <span class="s2">"AUC"</span><span class="p">:</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span>
+                <span class="s2">"Brier"</span><span class="p">:</span> <span class="n">brier_score_loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span>
+                <span class="s2">"CITL"</span><span class="p">:</span> <span class="n">citl</span><span class="p">,</span>
+                <span class="s2">"slope"</span><span class="p">:</span> <span class="n">slope</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s2">"site"</span><span class="p">,</span> <span class="s2">"model"</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logit(p) = -3.1726 + 0.1445 * FSH    (fit on Miami, n=946)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>AUC</th>
+      <th>Brier</th>
+      <th>CITL</th>
+      <th>slope</th>
+    </tr>
+    <tr>
+      <th>site</th>
+      <th>model</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">milan</th>
+      <th>quadratic (paper)</th>
+      <td>0.786</td>
+      <td>0.138</td>
+      <td>0.330</td>
+      <td>0.339</td>
+    </tr>
+    <tr>
+      <th>logistic in FSH</th>
+      <td>0.778</td>
+      <td>0.138</td>
+      <td>0.478</td>
+      <td>0.919</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">chicago</th>
+      <th>quadratic (paper)</th>
+      <td>0.707</td>
+      <td>0.197</td>
+      <td>0.853</td>
+      <td>0.230</td>
+    </tr>
+    <tr>
+      <th>logistic in FSH</th>
+      <td>0.697</td>
+      <td>0.198</td>
+      <td>0.963</td>
+      <td>0.689</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Same Brier score, AUC within 0.01, and a calibration slope near 1 instead of
+0.2 to 0.3. The logistic version keeps the paper’s one-input simplicity and
+can be recalibrated to a new clinic with a single intercept shift. It is a
+proposal from this reproduction, not part of the published model, and is
+labelled as such in <code class="docutils literal notranslate"><span class="pre">seminal</span></code>.</p>
+</section>
+<section id="sensitivity-analyses">
+<h2>6. Sensitivity analyses<a class="headerlink" href="#sensitivity-analyses" title="Link to this heading"></a></h2>
+<p><strong>Samples vs men.</strong> The paper’s units are semen analyses, not men: a man
+contributes more than one row if his samples were taken over 120 days apart.
+The deposit carries no patient identifier, so a first-sample-per-man analysis
+cannot be run and the degree of clustering is unknown. This is a limitation of
+the deposit that the paper does not quantify.</p>
+<p><strong>Stated vs reproduced exclusion rule.</strong> Does the choice of cohort rule
+(section 1) change the validation results? Re-score the external sites under
+the criteria as written.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stated</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">"../data/processed/stated/tradewell_2022.parquet"</span><span class="p">)</span>
+<span class="n">stated</span> <span class="o">=</span> <span class="n">add_azoospermia_risk_cols</span><span class="p">(</span><span class="n">stated</span><span class="p">[</span><span class="n">stated</span><span class="p">[</span><span class="s2">"included"</span><span class="p">]])</span>
+
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">rule</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"reproduced"</span><span class="p">,</span> <span class="n">scored</span><span class="p">),</span> <span class="p">(</span><span class="s2">"stated"</span><span class="p">,</span> <span class="n">stated</span><span class="p">)]:</span>
+    <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"milan"</span><span class="p">,</span> <span class="s2">"chicago"</span><span class="p">]:</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">site</span> <span class="o">==</span> <span class="n">site</span><span class="p">]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="s2">"azoospermia"</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">model</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"logistic"</span><span class="p">,</span> <span class="s2">"azoo_lr"</span><span class="p">),</span> <span class="p">(</span><span class="s2">"FSH-only"</span><span class="p">,</span> <span class="s2">"azoo_fsh"</span><span class="p">)]:</span>
+            <span class="n">citl</span><span class="p">,</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">citl_slope</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">g</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+            <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">"rule"</span><span class="p">:</span> <span class="n">rule</span><span class="p">,</span>
+                    <span class="s2">"site"</span><span class="p">:</span> <span class="n">site</span><span class="p">,</span>
+                    <span class="s2">"model"</span><span class="p">:</span> <span class="n">model</span><span class="p">,</span>
+                    <span class="s2">"n"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">),</span>
+                    <span class="s2">"AUC"</span><span class="p">:</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">g</span><span class="p">[</span><span class="n">col</span><span class="p">]),</span>
+                    <span class="s2">"Brier"</span><span class="p">:</span> <span class="n">brier_score_loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">g</span><span class="p">[</span><span class="n">col</span><span class="p">]),</span>
+                    <span class="s2">"CITL"</span><span class="p">:</span> <span class="n">citl</span><span class="p">,</span>
+                    <span class="s2">"slope"</span><span class="p">:</span> <span class="n">slope</span><span class="p">,</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s2">"site"</span><span class="p">,</span> <span class="s2">"model"</span><span class="p">,</span> <span class="s2">"rule"</span><span class="p">])</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>n</th>
+      <th>AUC</th>
+      <th>Brier</th>
+      <th>CITL</th>
+      <th>slope</th>
+    </tr>
+    <tr>
+      <th>site</th>
+      <th>model</th>
+      <th>rule</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="4" valign="top">chicago</th>
+      <th rowspan="2" valign="top">FSH-only</th>
+      <th>reproduced</th>
+      <td>596</td>
+      <td>0.707</td>
+      <td>0.197</td>
+      <td>0.853</td>
+      <td>0.230</td>
+    </tr>
+    <tr>
+      <th>stated</th>
+      <td>614</td>
+      <td>0.708</td>
+      <td>0.196</td>
+      <td>0.830</td>
+      <td>0.234</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">logistic</th>
+      <th>reproduced</th>
+      <td>596</td>
+      <td>0.718</td>
+      <td>0.178</td>
+      <td>0.043</td>
+      <td>0.702</td>
+    </tr>
+    <tr>
+      <th>stated</th>
+      <td>614</td>
+      <td>0.723</td>
+      <td>0.177</td>
+      <td>0.009</td>
+      <td>0.704</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">milan</th>
+      <th rowspan="2" valign="top">FSH-only</th>
+      <th>reproduced</th>
+      <td>1955</td>
+      <td>0.786</td>
+      <td>0.138</td>
+      <td>0.330</td>
+      <td>0.339</td>
+    </tr>
+    <tr>
+      <th>stated</th>
+      <td>1955</td>
+      <td>0.786</td>
+      <td>0.138</td>
+      <td>0.330</td>
+      <td>0.339</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">logistic</th>
+      <th>reproduced</th>
+      <td>1955</td>
+      <td>0.786</td>
+      <td>0.137</td>
+      <td>0.524</td>
+      <td>0.728</td>
+    </tr>
+    <tr>
+      <th>stated</th>
+      <td>1955</td>
+      <td>0.786</td>
+      <td>0.137</td>
+      <td>0.524</td>
+      <td>0.728</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The published coefficients reproduce the paper’s external AUCs (Milan
+0.79 / 0.79, Chicago 0.72 / 0.71) from the public deposit.</p></li>
+<li><p>The paper’s sample sizes reproduce exactly only with an exclusion rule that
+differs from the Methods: Y microdeletion was not excluded, absent testis is
+coded differently per site, and Chicago counts sperm concentration below
+0.01 million/mL as azoospermia.</p></li>
+<li><p>Table 1 reproduces except Milan’s FSH categories (binned on Milan’s own
+12.5 IU/L limit, not the stated 7.6) and Chicago’s testis volumes (deposited
+in cm, analysed in mL; the conversion is not recoverable).</p></li>
+<li><p>Refitting on Miami recovers Table 3 within one standard error of every term.</p></li>
+<li><p>Applied as published, both models underpredict on the external sites
+(CITL +0.3 to +0.9). The Chicago logistic model only appears calibrated
+because the cm volumes inflate its predictions. The FSH quadratic is
+over-confident (slope 0.2 to 0.3) and cannot be recalibrated on the logit
+scale; a two-parameter logistic in FSH matches its discrimination and
+calibrates normally.</p></li>
+<li><p>No patient identifier is deposited, so clustering of repeat samples cannot
+be assessed.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../data.html" class="btn btn-neutral float-left" title="The Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../api.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Leon Shpaner.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

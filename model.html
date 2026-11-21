@@ -1,0 +1,319 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Models &mdash; seminal 0.0.0a2</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=6a49913a" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=7e40b191"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=fd10adb8"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="The Data" href="data.html" />
+    <link rel="prev" title="Input Requirements and Common Pitfalls" href="inputs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            seminal
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#fsh-alone">FSH alone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#full-logistic-model">Full logistic model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#score-a-cohort">Score a cohort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#library-overview">Library overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#table-of-contents">Table of Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_notebooks/00_quickstart.html">seminal quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/00_quickstart.html#one-patient">One patient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/00_quickstart.html#the-fsh-curve">The FSH curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/00_quickstart.html#scoring-a-cohort">Scoring a cohort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/00_quickstart.html#explaining-a-prediction">Explaining a prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/00_quickstart.html#where-to-go-next">Where to go next</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usage_guide.html">Usage Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage_guide.html#fsh-alone-azoospermia-fsh">FSH alone: <code class="docutils literal notranslate"><span class="pre">azoospermia_fsh</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage_guide.html#full-model-azoospermia-lr">Full model: <code class="docutils literal notranslate"><span class="pre">azoospermia_lr</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage_guide.html#explaining-a-prediction">Explaining a prediction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage_guide.html#cohorts-add-azoospermia-risk-cols">Cohorts: <code class="docutils literal notranslate"><span class="pre">add_azoospermia_risk_cols</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="inputs.html">Input Requirements and Common Pitfalls</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="inputs.html#inputs">Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inputs.html#common-pitfalls">Common pitfalls</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#outcome">Outcome</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#development">Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fsh-only-quadratic">FSH-only quadratic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#logistic-regression">Logistic regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-the-reproduction-shows">What the reproduction shows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#discrimination">Discrimination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-not-implemented">What is not implemented</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">The Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="data.html#download-and-harmonize">Download and harmonize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html#two-exclusion-rules">Two exclusion rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html#things-to-know">Things to know</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_notebooks/01_reproduce_tradewell.html">Reproducing Tradewell et al. 2022</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/01_reproduce_tradewell.html#cohort-reconstruction">1. Cohort reconstruction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/01_reproduce_tradewell.html#table-1">2. Table 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/01_reproduce_tradewell.html#refit-on-the-miami-development-cohort">3. Refit on the Miami development cohort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/01_reproduce_tradewell.html#external-validation-in-depth">4. External validation in depth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/01_reproduce_tradewell.html#recalibration-per-site">5. Recalibration per site</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/01_reproduce_tradewell.html#sensitivity-analyses">6. Sensitivity analyses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_notebooks/01_reproduce_tradewell.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#single-patient">Single patient</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#seminal.azoospermia_fsh"><code class="docutils literal notranslate"><span class="pre">azoospermia_fsh()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#seminal.azoospermia_lr"><code class="docutils literal notranslate"><span class="pre">azoospermia_lr()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#cohorts">Cohorts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#seminal.add_azoospermia_risk_cols"><code class="docutils literal notranslate"><span class="pre">add_azoospermia_risk_cols()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#constants">Constants</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About seminal</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributors.html">Contributors/Maintainers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing seminal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-0-0-0a2-2026-11-20">Version 0.0.0a2 (2026-11-20)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#version-0-0-0a1-2026-11-20">Version 0.0.0a1 (2026-11-20)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">seminal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The Models</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+<img src="_static/seminal_logo.svg" alt="seminal Python library"
+     width="220" class="seminal-logo" draggable="false" oncontextmenu="return false;">
+
+           <div itemprop="articleBody">
+             
+  <section id="the-models">
+<h1>The Models<a class="headerlink" href="#the-models" title="Link to this heading"></a></h1>
+<section id="outcome">
+<h2>Outcome<a class="headerlink" href="#outcome" title="Link to this heading"></a></h2>
+<p>Both models predict azoospermia: no spermatozoa in the ejaculate, confirmed on
+at least two semen analyses with centrifugation of the pellet. The question
+they answer is whether a man presenting for infertility evaluation can be told
+his probability of azoospermia from a blood test, before or instead of a semen
+analysis.</p>
+</section>
+<section id="development">
+<h2>Development<a class="headerlink" href="#development" title="Link to this heading"></a></h2>
+<p>Tradewell et al. (2022) developed both models on 946 men evaluated at the
+University of Miami, after excluding prior vasectomy, solitary testis,
+exogenous testosterone or anabolic steroid use, and Y chromosome
+microdeletions. They then validated the models on 1,955 men from Milan (IRCCS
+Ospedale San Raffaele) and 596 from Chicago (University of Illinois).</p>
+</section>
+<section id="fsh-only-quadratic">
+<h2>FSH-only quadratic<a class="headerlink" href="#fsh-only-quadratic" title="Link to this heading"></a></h2>
+<p>The Miami men were binned by FSH and the observed proportion azoospermic in
+each bin was fit with a second-degree polynomial (Fig. 1 of the paper,
+R² = 0.95):</p>
+<div class="math notranslate nohighlight">
+\[p(\%) = 0.133\,\mathrm{FSH}^2 - 0.965\,\mathrm{FSH} + 10.1\]</div>
+<p>The curve is U-shaped: 10.1% at FSH 0, a minimum of 8.35% at FSH 3.63 IU/L,
+and 100% at 29.9 IU/L. <code class="docutils literal notranslate"><span class="pre">azoospermia_fsh</span></code> divides by 100 and clips to
+[0, 1] by default.</p>
+</section>
+<section id="logistic-regression">
+<h2>Logistic regression<a class="headerlink" href="#logistic-regression" title="Link to this heading"></a></h2>
+<div class="math notranslate nohighlight">
+\[p = \frac{1}{1 + e^{-\eta}}, \qquad
+\eta = \beta_0 + \sum_i \beta_i x_i\]</div>
+<p>with the coefficients of Table 3, used exactly as printed:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 40.0%" />
+<col style="width: 30.0%" />
+<col style="width: 30.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Term</p></th>
+<th class="head"><p>Units</p></th>
+<th class="head"><p>Coefficient</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Intercept</p></td>
+<td></td>
+<td><p>−1.9</p></td>
+</tr>
+<tr class="row-odd"><td><p>Age</p></td>
+<td><p>years</p></td>
+<td><p>0.02</p></td>
+</tr>
+<tr class="row-even"><td><p>FSH</p></td>
+<td><p>IU/L</p></td>
+<td><p>0.13</p></td>
+</tr>
+<tr class="row-odd"><td><p>LH</p></td>
+<td><p>IU/L</p></td>
+<td><p>0.03</p></td>
+</tr>
+<tr class="row-even"><td><p>Total testosterone</p></td>
+<td><p>ng/dL</p></td>
+<td><p>−0.002</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mean testis volume</p></td>
+<td><p>mL (orchidometer)</p></td>
+<td><p>−0.08</p></td>
+</tr>
+</tbody>
+</table>
+<p>The paper prints the model form as <code class="docutils literal notranslate"><span class="pre">1/exp[−(b₀</span> <span class="pre">+</span> <span class="pre">bᵢXᵢ)]</span></code>, which is a
+typesetting error (it exceeds 1 for any negative linear predictor). The
+standard logistic form is used here.</p>
+</section>
+<section id="what-the-reproduction-shows">
+<h2>What the reproduction shows<a class="headerlink" href="#what-the-reproduction-shows" title="Link to this heading"></a></h2>
+<p>The notebook <a class="reference internal" href="_notebooks/01_reproduce_tradewell.html"><span class="doc">Reproducing Tradewell et al. 2022</span></a> rebuilds the paper from
+the public deposit. In short:</p>
+<ul class="simple">
+<li><p>The cohort sizes (946 / 1,955 / 596) are reproduced exactly, with one
+departure from the stated exclusion rule (see <a class="reference internal" href="data.html"><span class="doc">The Data</span></a>).</p></li>
+<li><p>A fresh logistic fit on the Miami rows recovers every Table 3 coefficient
+within one standard error.</p></li>
+<li><p>The external AUCs reproduce: Milan 0.786 / 0.786 and Chicago 0.718 / 0.707
+(logistic / FSH-only) against the paper’s 0.79 / 0.78 and 0.72 / 0.71.</p></li>
+<li><p>Calibration, which the paper did not report, is where the models differ.
+The logistic model under-predicts in Milan (calibration-in-the-large +0.52
+on the log-odds scale, slope 0.73); the FSH-only quadratic is markedly
+over-confident on both sites (slope 0.23 to 0.34), and because it saturates
+at exactly 0 and 1 it cannot be recalibrated on the logit scale.</p></li>
+<li><p>An intercept-only recalibration fixes calibration-in-the-large per site. A
+logistic model in FSH alone, <code class="docutils literal notranslate"><span class="pre">logit(p)</span> <span class="pre">=</span> <span class="pre">−3.17</span> <span class="pre">+</span> <span class="pre">0.145·FSH</span></code> fit on Miami,
+matches the quadratic’s discrimination and Brier score with far better
+calibration. That model is this reproduction’s proposal, not part of the
+published paper, and is planned as a separately named function in a later
+release.</p></li>
+</ul>
+</section>
+<section id="discrimination">
+<h2>Discrimination<a class="headerlink" href="#discrimination" title="Link to this heading"></a></h2>
+<p>The paper reports AUCs of 0.79 (logistic) and 0.78 (FSH-only) in Milan and
+0.72 and 0.71 in Chicago. <code class="docutils literal notranslate"><span class="pre">tests/test_azoospermia.py</span></code> checks the library
+against these when <code class="docutils literal notranslate"><span class="pre">data/processed/</span></code> is present.</p>
+</section>
+<section id="what-is-not-implemented">
+<h2>What is not implemented<a class="headerlink" href="#what-is-not-implemented" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Refit (full-precision) coefficients.</strong> Recovered in the notebook but kept
+out of the package so that the package stays an implementation of the
+published equation.</p></li>
+<li><p><strong>Risk thresholds.</strong> The paper does not define a cutoff for “high risk”, so
+the package reports probabilities only.</p></li>
+<li><p><strong>Obstructive vs non-obstructive azoospermia.</strong> The outcome is any
+azoospermia; the models do not distinguish cause.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="inputs.html" class="btn btn-neutral float-left" title="Input Requirements and Common Pitfalls" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="data.html" class="btn btn-neutral float-right" title="The Data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Leon Shpaner.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
