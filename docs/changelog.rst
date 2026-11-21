@@ -1,6 +1,15 @@
 Changelog
 =========
 
+Version 0.0.0a2 (2026-11-20)
+----------------------------
+
+- README corrections: pre-release badge, install note, affiliation, the
+  reproduced exclusion rule and the matching Chicago numbers.
+- ``dcurves`` added to the ``data`` extras for the reproduction notebook.
+- Full journal title in the package description.
+- Documentation site and Zenodo archiving. No changes to the equations.
+
 Version 0.0.0a1 (2026-11-20)
 ----------------------------
 

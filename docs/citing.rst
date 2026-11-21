@@ -11,8 +11,10 @@ the original paper by Tradewell et al. (2022).
      title     = {{seminal: published risk equations in andrology and
                    male reproductive health}},
      year      = 2026,
-     version   = {0.0.0a1},
-     url       = {https://github.com/lshpaner/seminal}
+     version   = {0.0.0a2},
+     publisher = {Zenodo},
+     doi       = {10.5281/zenodo.24411154},
+     url       = {https://doi.org/10.5281/zenodo.24411154}
    }
 
    @article{tradewell2022,
@@ -32,5 +34,5 @@ the original paper by Tradewell et al. (2022).
    }
 
 A ``CITATION.cff`` file in the repository carries the same metadata; GitHub
-renders it as a "Cite this repository" button. A Zenodo DOI will be added
-once the first archived release is minted.
+renders it as a "Cite this repository" button. Each release is archived on
+`Zenodo <https://doi.org/10.5281/zenodo.24411154>`_ with its own version DOI.
